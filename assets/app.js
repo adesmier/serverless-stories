@@ -1,4 +1,4 @@
-var lock = new Auth0Lock('qQlVNB37q9bc6jR7205hGbNG1BBok1Uf', 'adesmier.eu.auth0.com');
+var lock = new Auth0Lock('UodtDNnv9oeSwk68Z4gggz4kozxtgv5R', 'adesmier.eu.auth0.com');
 
 // The login function once invoked will display the Lock widget
 // Upon successful login, we'll store the user profile and token in localStorage
@@ -7,17 +7,14 @@ function login(){
 };
 
 lock.on("authenticated", function(authResult) {
-  lock.getProfile(authResult.idToken, function(error, profile) {
-
+  lock.getUserInfo(authResult.accessToken, function(error, profile) {
     if (error) {
-       return alert(error.message);
+      return alert(error.message);
     }
 
-    console.log(JSON.stringify(profile));
-    console.log(authResult.idToken);
+    localStorage.setItem('accessToken', authResult.accessToken);
+    localStorage.setItem('profile', JSON.stringify(profile));
 
-    localStorage.setItem('profile', JSON.stringify(profile))
-    localStorage.setItem('token', authResult.idToken)
     updateAuthenticationStatus();
   });
 });
@@ -26,7 +23,7 @@ lock.on("authenticated", function(authResult) {
 // The logout function, will remove the user information and token from localStorage
 function logout(){
   localStorage.removeItem('profile');
-  localStorage.removeItem('token');
+  localStorage.removeItem('accessToken');
   updateAuthenticationStatus();
 };
 
