@@ -103,12 +103,13 @@ $(document).ready(function(){
 function loadAdmin(){
   if(window.location.pathname == '/admin/'){
     if(localStorage.getItem('accessToken')){
+      console.log(localStorage.getItem('accessToken'));
       $.ajax({
         type : 'GET',
-        url : 'https://wt-26212ff75758b7d16d19104dea3bca60-0.run.webtask.io/subscribers/subscribers',
-        headers : {
-          Authorization : 'Bearer ' + localStorage.getItem('accessToken')
-        }
+        url : 'https://wt-26212ff75758b7d16d19104dea3bca60-0.run.webtask.io/subscribers/subscribers'
+        // headers : {
+        //   Authorization : 'Bearer ' + localStorage.getItem('accessToken')
+        // }
       }).done(function(data) {
         for(var i = 0; i < data.length; i++){
           $('#subscribers').append('<h4>' + data[i] + '</h4>');
