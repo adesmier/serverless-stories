@@ -7,13 +7,13 @@ function login(){
 };
 
 lock.on("authenticated", function(authResult) {
-  lock.getUserInfo(authResult.accessToken, function(error, profile) {
+  lock.getUserInfo(authResult.idToken, function(error, profile) {
     if (error) {
       return alert(error.message);
     }
 
     localStorage.setItem('testToken', JSON.stringify(authResult));
-    localStorage.setItem('accessToken', authResult.accessToken);
+    localStorage.setItem('idToken', authResult.idToken);
     localStorage.setItem('profile', JSON.stringify(profile));
 
     updateAuthenticationStatus();
@@ -24,7 +24,7 @@ lock.on("authenticated", function(authResult) {
 // The logout function, will remove the user information and token from localStorage
 function logout(){
   localStorage.removeItem('profile');
-  localStorage.removeItem('accessToken');
+  localStorage.removeItem('idToken');
   updateAuthenticationStatus();
 };
 
