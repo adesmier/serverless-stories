@@ -1,4 +1,4 @@
-var lock = new Auth0Lock('UodtDNnv9oeSwk68Z4gggz4kozxtgv5R', 'adesmier.eu.auth0.com');
+var lock = new Auth0Lock('djk9b6nLgKKKCTdVs1kVyHoL1jko5xNl', 'adesmier.eu.auth0.com');
 
 // The login function once invoked will display the Lock widget
 // Upon successful login, we'll store the user profile and token in localStorage
@@ -106,7 +106,7 @@ function loadAdmin(){
       console.log(localStorage.getItem('accessToken'));
       $.ajax({
         type : 'GET',
-        url : 'https://wt-26212ff75758b7d16d19104dea3bca60-0.run.webtask.io/subscribers/subscribers',
+        url : 'https://webtask.it.auth0.com/api/run/wt-26212ff75758b7d16d19104dea3bca60-0/subscribers/subscribers',
         headers : {
           Authorization : 'Bearer ' + localStorage.getItem('accessToken')
         }
@@ -126,7 +126,7 @@ $('#newsletter').submit(function(e){
   $.ajax({
     type : 'POST',
     contentType: 'application/json',
-    url : 'https://wt-26212ff75758b7d16d19104dea3bca60-0.run.webtask.io/subscribers/subscribe',
+    url : 'https://webtask.it.auth0.com/api/run/wt-26212ff75758b7d16d19104dea3bca60-0/subscribers/subscribe',
     data: JSON.stringify({ "email": email }),
     dataType    : 'json'
     // headers : {
