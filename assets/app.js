@@ -13,7 +13,7 @@ lock.on("authenticated", function(authResult) {
     }
 
     localStorage.setItem('testToken', JSON.stringify(authResult));
-    localStorage.setItem('accessToken', authResult.accessToken);
+    localStorage.setItem('accessToken', authResult.idToken);
     localStorage.setItem('profile', JSON.stringify(profile));
 
     updateAuthenticationStatus();
