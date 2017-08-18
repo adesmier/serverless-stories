@@ -28,6 +28,8 @@ function logout(){
   updateAuthenticationStatus();
 };
 
+
+
 // The getUser helper function will get the current status of our user
 // and display user information or a link to login if there is no
 // authenticated user
@@ -38,6 +40,7 @@ function updateAuthenticationStatus(){
   if(user){
     user = JSON.parse(user);
     $('#user').show().append('<a onclick="logout()">' + user.email + ' (Log out)</a>');
+    $('#admin-page').append('<a href="https://serverless-stories.netlify.com/admin">Admin</a>');
     $('#login').hide();
   } else {
     $('#login').show().append('<a onclick="login()">Log in</a>');
@@ -47,8 +50,10 @@ function updateAuthenticationStatus(){
 
 // Any time a page is loaded, we'll check to see if there is a user.
 $(document).ready(function(){
-  updateAuthenticationStatus();
-  loadAdmin()
+  updateAuthenicationStatus();
+  if(window.location.pathname == '/admin/'){
+    loadAdmin();
+  }
 });
 
 
@@ -102,7 +107,7 @@ $(document).ready(function(){
 // }
 
 function loadAdmin(){
-  if(window.location.pathname == '/admin/'){
+
     if(localStorage.getItem('accessToken')){
       console.log(localStorage.getItem('accessToken'));
       $.ajax({
@@ -119,7 +124,7 @@ function loadAdmin(){
     } else {
       window.location = '/';
     }
-  }
+
 }
 
 $('#newsletter').submit(function(e){
