@@ -99,25 +99,25 @@ $(document).ready(function(){
 //   }
 // }
 
-// function loadAdmin(){
-//   if(window.location.pathname == '/admin/'){
-//     if(localStorage.getItem('token')){
-//       $.ajax({
-//         type : 'GET',
-//         url : 'https://webtask.it.auth0.com/api/run/wt-kukicadnan-gmail_com-0/newsletter-complex/subscribers?webtask_no_cache=1',
-//         headers : {
-//           Authorization : 'Bearer ' + localStorage.getItem('token')
-//         }
-//       }).done(function(data) {
-//         for(var i = 0; i < data.length; i++){
-//           $('#subscribers').append('<h4>' + data[i] + '</h4>');
-//         }
-//       });
-//     } else {
-//       window.location = '/';
-//     }
-//   }
-// }
+function loadAdmin(){
+  if(window.location.pathname == '/admin/'){
+    if(localStorage.getItem('accessToken')){
+      $.ajax({
+        type : 'GET',
+        url : 'https://wt-26212ff75758b7d16d19104dea3bca60-0.run.webtask.io/subscribers/subscribers',
+        headers : {
+          Authorization : 'Bearer ' + localStorage.getItem('accessToken')
+        }
+      }).done(function(data) {
+        for(var i = 0; i < data.length; i++){
+          $('#subscribers').append('<h4>' + data[i] + '</h4>');
+        }
+      });
+    } else {
+      window.location = '/';
+    }
+  }
+}
 
 $('#newsletter').submit(function(e){
   var email = $('#email').val();
