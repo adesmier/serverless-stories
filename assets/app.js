@@ -47,6 +47,7 @@ function updateAuthenticationStatus(){
 // Any time a page is loaded, we'll check to see if there is a user.
 $(document).ready(function(){
   updateAuthenticationStatus();
+  loadAdmin()
 });
 
 
