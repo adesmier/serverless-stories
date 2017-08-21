@@ -127,6 +127,7 @@ function loadAdmin(){
         }
       });
     } else {
+      console.log('access token doesn\'t exist');
       //window.location = '/';
     }
 
