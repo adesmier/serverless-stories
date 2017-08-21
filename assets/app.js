@@ -90,12 +90,14 @@ function loadAdmin(){
           $('#subscribers').append('<h4>' + data[i] + '</h4>');
         }
       }).fail(function(jqxhr, textStatus, error){
+        var err = textStatus + ', ' + error;
         console.log('Request failed with error: ' + err);
       });
     } else {
       console.log('access token doesn\'t exist');
       if(++counter === 3){
         $('#subscribers').append('<h2>Opps! You\'re not allowed here!</h2>');
+        clearInterval(interval);
       }
     }
 
