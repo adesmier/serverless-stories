@@ -130,7 +130,7 @@ function loadAdmin(){
         }
       });
     } else {
-      window.location = '/';
+      //window.location = '/';
     }
 
 }
