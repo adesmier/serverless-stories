@@ -1,9 +1,22 @@
-var lock = new Auth0Lock('djk9b6nLgKKKCTdVs1kVyHoL1jko5xNl', 'adesmier.eu.auth0.com', {
+
+
+var options = {
+  rememberLastLogin: false,
+  theme: {
+    logo: 'https://serverless-stories.netlify.com/logo.png',
+    primaryColor: '#0d2f52',
+    labeledSubmitButton: false
+  },
+  languageDictionary: {
+    title: "Client Area"
+  },
   auth: {
     redirectUrl: 'https://serverless-stories.netlify.com/admin',
     responseType: 'token id_token'
   }
-});
+};
+
+var lock = new Auth0Lock('djk9b6nLgKKKCTdVs1kVyHoL1jko5xNl', 'adesmier.eu.auth0.com', options);
 
 // The login function once invoked will display the Lock widget
 // Upon successful login, we'll store the user profile and token in localStorage
