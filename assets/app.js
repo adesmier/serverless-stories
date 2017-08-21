@@ -1,4 +1,12 @@
-var lock = new Auth0Lock('djk9b6nLgKKKCTdVs1kVyHoL1jko5xNl', 'adesmier.eu.auth0.com');
+var lock = new Auth0Lock('djk9b6nLgKKKCTdVs1kVyHoL1jko5xNl', 'adesmier.eu.auth0.com', {
+  auth: {
+    redirectUrl: 'https://serverless-stories.netlify.com/admin',
+    responseType: 'code',
+    params: {
+      scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
+    }
+  }
+});
 
 // The login function once invoked will display the Lock widget
 // Upon successful login, we'll store the user profile and token in localStorage
