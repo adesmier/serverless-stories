@@ -17,7 +17,6 @@ lock.on("authenticated", function(authResult) {
       return alert(error.message);
     }
 
-    localStorage.setItem('testToken', JSON.stringify(authResult));
     localStorage.setItem('accessToken', authResult.idToken);
     localStorage.setItem('profile', JSON.stringify(profile));
 
@@ -54,14 +53,15 @@ function updateAuthenticationStatus(){
 }
 
 // Any time a page is loaded, we'll check to see if there is a user.
+
+var interval = null;
+var counter = 0;
+
 $(document).ready(function(){
   updateAuthenticationStatus();
-  
-});
-
-$(window).on('load', function(){
   if(window.location.pathname == '/admin/'){
-    loadAdmin();
+    console.log('load admin called');
+    interval = setInterval(loadAdmin, 500);
   }
 });
 
@@ -74,51 +74,11 @@ $(window).on('load', function(){
 
 
 
-
-
-
-
-
-
-
-// $(document).ready(function(){
-//   updateAuthenticationStatus();
-//   loadAdmin();
-// });
-// function logout(){
-//   localStorage.removeItem('profile');
-//   localStorage.removeItem('token');
-//   updateAuthenticationStatus();
-// };
-// function login(){
-//   lock.show(function(err, profile, id_token) {
-//     if (err) {
-//       return alert(err.message);
-//     }
-//     localStorage.setItem('profile', JSON.stringify(profile));
-//     localStorage.setItem('token', id_token);
-//     updateAuthenticationStatus();
-//   });
-// };
-
-// function updateAuthenticationStatus(){
-//   $('#user').empty();
-//   $('#login').empty();
-//   var user = localStorage.getItem('profile');
-//   if(user){
-//     user = JSON.parse(user);
-//     $('#user').show().append('<a onclick="logout()">' + user.email + ' (Log out)</a>');
-//     $('#login').hide();
-//   } else {
-//     $('#login').show().append('<a onclick="login()">Log in</a>');
-//     $('#user').hide();
-//   }
-// }
-
 function loadAdmin(){
 
     if(localStorage.getItem('accessToken')){
       console.log(localStorage.getItem('accessToken'));
+      clearInterval(interval);
       $.ajax({
         type : 'GET',
         url : 'https://webtask.it.auth0.com/api/run/wt-26212ff75758b7d16d19104dea3bca60-0/subscribers/subscribers',
@@ -129,10 +89,14 @@ function loadAdmin(){
         for(var i = 0; i < data.length; i++){
           $('#subscribers').append('<h4>' + data[i] + '</h4>');
         }
+      }).fail(function(jqxhr, textStatus, error){
+        console.log('Request failed with error: ' + err);
       });
     } else {
       console.log('access token doesn\'t exist');
-      //window.location = '/';
+      if(++counter === 3){
+        $('#subscribers').append('<h2>Opps! You\'re not allowed here!</h2>');
+      }
     }
 
 }
@@ -160,26 +124,3 @@ $('#newsletter').submit(function(e){
   e.preventDefault();
 })
 
-// $('#tip').submit(function(e){
-//   $.ajax({
-//     type : 'POST',
-//     url : 'https://webtask.it.auth0.com/api/run/wt-kukicadnan-gmail_com-0/tips?access_token=' + localStorage.getItem('token'),
-//     data : {message : $('#message').val()},
-//     dataType    : 'json'
-//   }).done(function(data) {
-//     $('#response').empty();
-//     if(data.statusCode == 200){
-//       $('#tip').hide();
-//       $('#response').append('<div class="alert alert-success">'+ data.message +'</div>')
-//     } else {
-//       $('#tip').hide();
-//       $('#response').append('<div class="alert alert-danger">'+ data.message +'</div>')
-//     }
-//   }).error(function(data){
-//     $('#response').empty();
-//     if(data.status == 401){
-//       $('#response').append('<div class="alert alert-danger">You must be logged in to submit tips. :(</div>')
-//     }
-//   });
-//   e.preventDefault();
-// })
