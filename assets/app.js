@@ -1,6 +1,6 @@
 var lock = new Auth0Lock('djk9b6nLgKKKCTdVs1kVyHoL1jko5xNl', 'adesmier.eu.auth0.com', {
   auth: {
-    redirect_uri: 'https://serverless-stories.netlify.com/admin'
+    redirectUrl: 'https://serverless-stories.netlify.com/admin'
   }
 });
 
