@@ -2,12 +2,14 @@
 
 var options = {
   rememberLastLogin: false,
+  allowForgotPassword: false,
   theme: {
     logo: 'https://serverless-stories.netlify.com/phil.jpg',
     primaryColor: '#0d2f52',
     labeledSubmitButton: false
   },
   languageDictionary: {
+    emailInputPlaceholder: "user@email.com",
     title: "Client Area"
   },
   auth: {
