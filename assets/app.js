@@ -3,7 +3,7 @@
 var options = {
   rememberLastLogin: false,
   theme: {
-    logo: 'https://serverless-stories.netlify.com/logo.png',
+    logo: 'https://serverless-stories.netlify.com/phil.png',
     primaryColor: '#0d2f52',
     labeledSubmitButton: false
   },
