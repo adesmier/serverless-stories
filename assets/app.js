@@ -18,7 +18,7 @@ var options = {
   }
 };
 
-var lock = new Auth0Lock('djk9b6nLgKKKCTdVs1kVyHoL1jko5xNl', 'adesmier.eu.auth0.com', options);
+var lock = new Auth0Lock('Qht6UMzjPGp4dABn0ewGu33yST8JvKu2', 'adesmier.eu.auth0.com', options);
 
 // The login function once invoked will display the Lock widget
 // Upon successful login, we'll store the user profile and token in localStorage
@@ -96,7 +96,7 @@ function loadAdmin(){
       clearInterval(interval);
       $.ajax({
         type : 'GET',
-        url : 'https://webtask.it.auth0.com/api/run/wt-26212ff75758b7d16d19104dea3bca60-0/subscribers/subscribers',
+        url : 'https://webtask.it.auth0.com/api/run/wt-26212ff75758b7d16d19104dea3bca60-0/ianarber/subscribers',
         headers : {
           Authorization : 'Bearer ' + localStorage.getItem('accessToken')
         }
@@ -123,7 +123,7 @@ $('#newsletter').submit(function(e){
   $.ajax({
     type : 'POST',
     contentType: 'application/json',
-    url : 'https://webtask.it.auth0.com/api/run/wt-26212ff75758b7d16d19104dea3bca60-0/subscribers/subscribe',
+    url : 'https://webtask.it.auth0.com/api/run/wt-26212ff75758b7d16d19104dea3bca60-0/ianarber/subscribers',
     data: JSON.stringify({ "email": email }),
     dataType    : 'json'
     // headers : {
